@@ -1,12 +1,21 @@
 <script language=javascript>
+
+    
+    
     function enter(a){
         document.cal.result.value+=a;
+
     }
     //var state="";
-    var internalval=0;
+    var internalval=parseInt(document.cal.result.value);
     var reserveop="";
+
     
+
     function op(operator){
+
+        console.log(`internalval: ${internalval}\nreserveop: ${reserveop}`);
+
         if(reserveop==""){
             internalvalue = parseInt(document.cal.result.value);
             reserveop=operator;
@@ -16,33 +25,35 @@
                 document.cal.result.value=parseInt(internalval)+parseInt(document.cal.result.value);
                 reserveop=operator;
                 internalval=0;
-            }else{
-                if(reserveop=='-'){
-                document.cal.result.value=parseInt(internalval)-parseInt(document.cal.result.value);
-                reserveop=operator;
-                internalval=0;
-            }else{
-                if(reserveop=='*'){
-                document.cal.result.value=parseInt(internalval)*parseInt(document.cal.result.value);
-                reserveop=operator;
-                internalval=0;
-            }else{
-                if(reserveop=='/'){
-                document.cal.result.value=parseInt(internalval)/parseInt(document.cal.result.value);
-                reserveop=operator;
-                internalval=0;
-            }
-            }
-            }
+            }   else{
+                    if(reserveop=='-'){
+                        document.cal.result.value=parseInt(internalval)-parseInt(document.cal.result.value);
+                        reserveop=operator;
+                        internalval=0;
+                }   else{
+                        if(reserveop=='*'){
+                            document.cal.result.value=parseInt(internalval)*parseInt(document.cal.result.value);
+                            reserveop=operator;
+                            internalval=0;
+                    }   else{
+                            if(reserveop=='/'){
+                                document.cal.result.value=parseInt(internalval)/parseInt(document.cal.result.value);
+                                reserveop=operator;
+                                internalval=0;
+                            }
+                        }
+                     }
             }
         }
+
+       // console.log(`internalval: ${internalval}\nreserveop: ${reserveop}`);
     }
 </script>
 
 <html>
     <head>
         <body>
-            <form name=calc>
+            <form name=cal>
                 <input name =result size=12><br>
                 <input type = button name=zero value=0 onclick='enter("0")'>
                 <input type = button value =1 onclick='enter("1")'> 
