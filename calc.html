@@ -1,59 +1,58 @@
 <script language=javascript>
-
-    
-    
-    function enter(a){
-        document.cal.result.value+=a;
-
+    var internalval=0;
+    function enter(num){
+      if(reserveop ==""){
+        document.cal.result.value+=num;
+      }else{
+        internalval=document.cal.result.value;
+        document.cal.result.value=num;
+      }
+        
     }
     //var state="";
-    var internalval=parseInt(document.cal.result.value);
-    var reserveop="";
-
     
-
+    var reserveop="";
+    var a
+    var b;
+    
     function op(operator){
+        reserveop=operator;
+        a=parseInt(document.cal.result.value);
 
-        console.log(`internalval: ${internalval}\nreserveop: ${reserveop}`);
 
-        if(reserveop==""){
-            internalvalue = parseInt(document.cal.result.value);
-            reserveop=operator;
-            document.cal.result.value="";
-        }else{
-            if(reserveop=='+'){
-                document.cal.result.value=parseInt(internalval)+parseInt(document.cal.result.value);
-                reserveop=operator;
-                internalval=0;
-            }   else{
-                    if(reserveop=='-'){
-                        document.cal.result.value=parseInt(internalval)-parseInt(document.cal.result.value);
-                        reserveop=operator;
-                        internalval=0;
-                }   else{
-                        if(reserveop=='*'){
-                            document.cal.result.value=parseInt(internalval)*parseInt(document.cal.result.value);
-                            reserveop=operator;
-                            internalval=0;
-                    }   else{
-                            if(reserveop=='/'){
-                                document.cal.result.value=parseInt(internalval)/parseInt(document.cal.result.value);
-                                reserveop=operator;
-                                internalval=0;
-                            }
-                        }
-                     }
-            }
+    }
+
+    function clearresult(){
+      var internalval=0;
+      var reserveop="";
+      document.cal.result.value="";
+    }
+
+    function doOp(){
+      if(reserveop!=""){
+        console.log("equal");
+        b=parseInt(document.cal.result.value);
+        switch (reserveop){
+          case "+":
+            document.cal.result.value=a+b;
+            break;
+          case "-":
+            document.cal.result.value=a-b;
+            break;
+          case "*":
+            document.cal.result.value=a*b;
+            break;
+          case "/":
+            document.cal.result.value=a/b;
         }
-
-       // console.log(`internalval: ${internalval}\nreserveop: ${reserveop}`);
+      }
     }
 </script>
 
 <html>
     <head>
         <body>
-            <form name=cal>
+            <form name="cal">
                 <input name =result size=12><br>
                 <input type = button name=zero value=0 onclick='enter("0")'>
                 <input type = button value =1 onclick='enter("1")'> 
@@ -70,6 +69,7 @@
                 <input type = button name =minus value='-' onclick='op("-")'> 
                 <input type = button name =multiply value='*' onclick='op("*")'><br>
                 <input type = button name =divide value='/' onclick='op("/")'>
+                <input type = button name =equal value='=' onclick='doOp()'>
 
 
             </form>
